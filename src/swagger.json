@@ -31,26 +31,28 @@
 				}
 			}
 		},
-		"/auth/login/{email}/{password}": {
-			"parameters": [
-				{
-					"in": "path",
-					"name": "email",
-					"required": true,
-					"description": "Email of user we want log in.",
-					"type": "string"
-				},
-				{
-					"in": "path",
-					"name": "password",
-					"required": true,
-					"description": "Password of user we want log in.",
-					"type": "string"
-				}
-			],
-			"get": {
+		"/auth/login": {
+			"post": {
 				"tags": [ "Auth" ],
 				"summary": "Login with Email and Password.",
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "User data that we want update.",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"email": {
+									"type": "string"
+								},
+								"password": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "Success",

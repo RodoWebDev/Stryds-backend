@@ -7,7 +7,7 @@ import { asyncMiddleware, authenticateJWT } from '../../libs/utils';
 const router = express.Router();
 
 router.get('/all', authenticateJWT, asyncMiddleware(getAllUsers));
-router.get('/login/:email/:password', asyncMiddleware(login));
+router.post('/login', asyncMiddleware(login));
 router.put('/signin', asyncMiddleware(signin));
 router.post('/update', authenticateJWT, asyncMiddleware(updateUser));
 

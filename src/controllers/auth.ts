@@ -27,15 +27,15 @@ export const getAllUsers = ({ user }: { user: any }, res: Response) => {
 		});
 };
 
-export const login = ({ params }: { params: any }, res: Response) => {
-	Users.where('emailAddress', '==', params.email)
+export const login = ({ body }: { body: any }, res: Response) => {
+	Users.where('emailAddress', '==', body.email)
 		.get()
 		.then((snapshot) => {
 			if (snapshot.docs.length === 0) {
 				res.status(401).json('Email is incorrect.');
 			}
 			const userDatas = snapshot.docs[0].data();
-			if (bcrypt.compareSync(params.password, userDatas.password)) {
+			if (bcrypt.compareSync(body.password, userDatas.password)) {
 				const accessToken = jwt.sign(userDatas, process.env.JWT_SECRET);
 				res.status(200).json({ ...userDatas, accessToken: accessToken });
 			} else {
