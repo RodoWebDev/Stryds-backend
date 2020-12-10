@@ -1,4 +1,4 @@
-# Volition API
+# Stryds API
 
 Stryds API for Mobile App
 <details>
