@@ -1,0 +1,150 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "1.0.0",
+		"title": "Stryds-Typescript-NodeJS-Rest-API",
+		"description": "You can test all APIs."
+	},
+	"host": "localhost:8001",
+	"basePath": "/api/v1/",
+	"tags": [
+		{
+			"name": "Auth",
+			"description": "APIs for Auth"
+		}
+	],
+	"schemes": [ "http" ],
+	"consumes": [ "application/json" ],
+	"produces": [ "application/json" ],
+	"paths": {
+		"/auth/all": {
+			"get": {
+				"tags": [ "Auth" ],
+				"summary": "Get All User datas",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/Users"
+						}
+					}
+				}
+			}
+		},
+		"/auth/login/{email}/{password}": {
+			"parameters": [
+				{
+					"in": "path",
+					"name": "email",
+					"required": true,
+					"description": "Email of user we want log in.",
+					"type": "string"
+				},
+				{
+					"in": "path",
+					"name": "password",
+					"required": true,
+					"description": "Password of user we want log in.",
+					"type": "string"
+				}
+			],
+			"get": {
+				"tags": [ "Auth" ],
+				"summary": "Login with Email and Password.",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					},
+					"404": {
+						"description": "Faild, Email or Password incorrect."
+					}
+				}
+			}
+		},
+		"/auth/signin": {
+			"put": {
+				"tags": [ "Auth" ],
+				"summary": "Sign in",
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "User data that we want create.",
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					},
+					"404": {
+						"description": "Faild."
+					}
+				}
+			}
+		},
+		"/auth/update": {
+			"post": {
+				"tags": [ "Auth" ],
+				"summary": "Update User Information",
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "User data that we want update.",
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success"
+					},
+					"404": {
+						"description": "Faild, User data not found."
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"Users": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/User"
+			}
+		},
+		"User": {
+			"type": "object",
+			"properties": {
+				"firstName": {
+					"type": "string"
+				},
+				"lastName": {
+					"type": "string"
+				},
+				"userName": {
+					"type": "string"
+				},
+				"emailAddress": {
+					"type": "string"
+				},
+				"phoneNumber": {
+					"type": "string"
+				},
+				"photoUrl": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
